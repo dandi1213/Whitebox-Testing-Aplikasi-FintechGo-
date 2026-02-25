@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Target</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Daftar Target Tabungan</h1>
+
+    {% if targets %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Kategori</th>
+                    <th>Nominal</th>
+                    <th>Jangka Waktu</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Status</th>
+                    <th>Asuransi</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in targets %}
+                <tr>
+                    <td>{{ t.nama }}</td>
+                    <td>{{ t.kategori }}</td>
+                    <td>Rp {{ "{:,}".format(t.nominal) }}</td>
+                    <td>{{ t.jangka_waktu }} bln</td>
+                    <td>{{ t.tanggal_mulai }}</td>
+                    <td>{{ t.status }}</td>
+                    <td>{{ "Ya" if t.asuransi else "Tidak" }}</td>
+                    <td>Rp {{ "{:,}".format(t.total) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Belum ada target.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('index') }}">Kembali ke Form</a>
+</div>
+
+</body>
+</html>
